@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const path = require('path')
+const connectDB = require('./server/database/conncection.js')
 
 const app = express();
 
@@ -10,6 +11,8 @@ const PORT = process.env.PORT || 8080
 
 //log request
 app.use(morgan('tiny'));
+
+connectDB();
 
 // parse request to body-parser
 app.use(express.json());
@@ -29,3 +32,4 @@ app.use('/', require('./server/routes/router.js'))
 
 
 app.listen(PORT, () => {console.log(`Server is running on http://localhost:${PORT}`)});
+
